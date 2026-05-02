@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Safety Audit Form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="background-glow"></div>
+
+  <main class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Audit progress">
+      <div class="brand">
+        <button type="button" id="sidebarExpandBtn" class="sidebar-expand" aria-label="Open sidebar">✓</button>
+        <div class="brand-mark" id="sidebarLogo">✓</div>
+        <div>
+          <p class="eyebrow">WorkSafeBC Ready</p>
+          <h1>Safety Audit</h1>
+        </div>
+        <button type="button" id="sidebarToggle" class="sidebar-toggle" aria-label="Minimize sidebar">‹</button>
+      </div>
+
+      <div class="score-card">
+        <span>Compliance Score</span>
+        <strong id="liveScore">0%</strong>
+        <div class="score-track">
+          <div id="scoreFill" class="score-fill"></div>
+        </div>
+        <small id="scoreLabel">Start your audit</small>
+      </div>
+
+      <nav class="steps" id="stepList"></nav>
+    </aside>
+
+    <section class="form-panel">
+      <header class="mobile-header">
+        <div class="brand-mark">✓</div>
+        <div>
+          <p class="eyebrow">Modern Safety Audit</p>
+          <h2 id="mobileTitle">Company Information</h2>
+        </div>
+      </header>
+
+      <form id="auditForm">
+        <!-- Page 1 -->
+        <section class="page active" data-title="Company Information" data-icon="🧭">
+          <div class="page-heading">
+            <span class="page-icon">🧭</span>
+            <div>
+              <p class="eyebrow">Page 1 of 10</p>
+              <h2>Basic Information</h2>
+              <p>Start with the site and company details for this audit.</p>
+            </div>
+          </div>
+
+          <div class="grid two-col">
+            <label class="field">
+              <span>Company Name</span>
+              <input type="text" name="companyName" placeholder="Acme Construction Ltd." required>
+            </label>
+
+            <label class="field">
+              <span>Site Location</span>
+              <input type="text" name="siteLocation" placeholder="Vancouver, BC" required>
+            </label>
+
+            <label class="field">
+              <span>Industry Type</span>
+              <select name="industryType" required>
+                <option value="">Select industry</option>
+                <option>Construction</option>
+                <option>Warehouse</option>
+                <option>Manufacturing</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Number of Workers</span>
+              <input id="workersCount" type="number" name="workers" min="0" placeholder="12" required>
+            </label>
+
+            <label class="field">
+              <span>Supervisor Name</span>
+              <input type="text" name="supervisorName" placeholder="Jordan Lee">
+            </label>
+
+            <label class="field">
+              <span>Date of Audit</span>
+              <input type="date" name="auditDate" required>
+            </label>
+          </div>
+        </section>
+
+        <!-- Page 2 -->
+        <section class="page" data-title="Risk Assessment" data-icon="⚠️">
+          <div class="page-heading">
+            <span class="page-icon danger">⚠️</span>
+            <div>
+              <p class="eyebrow">Page 2 of 10</p>
+              <h2>Initial Risk Overview</h2>
+              <p>Capture the overall condition of the site before deeper inspection.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="field-title">Overall Risk Level</span>
+            <div class="segmented">
+              <label><input type="radio" name="riskLevel" value="Low"> <span class="pill low">🟢 Low</span></label>
+              <label><input type="radio" name="riskLevel" value="Medium"> <span class="pill medium">🟡 Medium</span></label>
+              <label><input type="radio" name="riskLevel" value="High"> <span class="pill high">🔴 High</span></label>
+            </div>
+          </div>
+
+          <div class="grid two-col">
+            <div class="field">
+              <span>Are workers following safety procedures?</span>
+              <div class="switch-row">
+                <label><input type="radio" name="proceduresFollowed" value="Yes"> Yes</label>
+                <label><input type="radio" name="proceduresFollowed" value="No"> No</label>
+              </div>
+            </div>
+
+            <div class="field">
+              <span>Any immediate danger present?</span>
+              <div class="switch-row">
+                <label><input type="radio" name="immediateDanger" value="Yes"> Yes</label>
+                <label><input type="radio" name="immediateDanger" value="No"> No</label>
+              </div>
+            </div>
+          </div>
+
+          <label id="hazardDescriptionWrap" class="field conditional hidden">
+            <span>Describe immediate hazards</span>
+            <textarea name="immediateHazards" placeholder="Describe the danger, affected area, and urgent controls required."></textarea>
+          </label>
+        </section>
+
+        <!-- Page 3 -->
+        <section class="page" data-title="PPE Compliance" data-icon="🦺">
+          <div class="page-heading">
+            <span class="page-icon ppe">🦺</span>
+            <div>
+              <p class="eyebrow">Page 3 of 10</p>
+              <h2>Personal Protective Equipment</h2>
+              <p>Use quick toggles to record PPE compliance.</p>
+            </div>
+          </div>
+
+          <div class="toggle-table">
+            <div class="toggle-head">
+              <span>PPE Item</span>
+              <span>Status</span>
+            </div>
+
+            <div class="toggle-row">
+              <span>Hard Hats</span>
+              <label class="toggle"><input type="checkbox" name="ppeHardHats" checked><span></span></label>
+            </div>
+            <div class="toggle-row">
+              <span>Safety Boots</span>
+              <label class="toggle"><input type="checkbox" name="ppeBoots" checked><span></span></label>
+            </div>
+            <div class="toggle-row">
+              <span>Gloves</span>
+              <label class="toggle"><input type="checkbox" name="ppeGloves"><span></span></label>
+            </div>
+            <div class="toggle-row">
+              <span>High Visibility Clothing</span>
+              <label class="toggle"><input type="checkbox" name="ppeHiVis" checked><span></span></label>
+            </div>
+          </div>
+
+          <label class="field">
+            <span>PPE Issues Observed</span>
+            <textarea name="ppeIssues" placeholder="Example: Two workers missing gloves near loading area."></textarea>
+          </label>
+        </section>
+
+        <!-- Page 4 -->
+        <section class="page" data-title="First Aid" data-icon="🚑">
+          <div class="page-heading">
+            <span class="page-icon firstaid">🚑</span>
+            <div>
+              <p class="eyebrow">Page 4 of 10</p>
+              <h2>First Aid Requirements</h2>
+              <p>Confirm kit availability, attendant coverage, and certification level.</p>
+            </div>
+          </div>
+
+          <div class="grid two-col">
+            <div class="field">
+              <span>First Aid Kit Available?</span>
+              <div class="switch-row">
+                <label><input type="radio" name="firstAidKit" value="Yes"> Yes</label>
+                <label><input type="radio" name="firstAidKit" value="No"> No</label>
+              </div>
+            </div>
+
+            <label class="field">
+              <span>Kit Type</span>
+              <select name="kitType">
+                <option value="">Select kit type</option>
+                <option>Basic</option>
+                <option>Intermediate</option>
+                <option>Unknown</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Number of First Aid Attendants</span>
+              <input id="attendantsCount" type="number" name="attendants" min="0" placeholder="1">
+            </label>
+
+            <label class="field">
+              <span>Certification Level</span>
+              <select id="certLevel" name="certificationLevel">
+                <option>None</option>
+                <option>OFA Level 1</option>
+                <option>OFA Level 2</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="firstAidWarning" class="warning-box hidden">
+            <strong>⚠️ Non-compliant with WorkSafeBC requirements</strong>
+            <p>Two or more workers are present and no trained first aid attendant has been recorded.</p>
+          </div>
+        </section>
+
+        <!-- Page 5 -->
+        <section class="page" data-title="Emergency Plan" data-icon="🧯">
+          <div class="page-heading">
+            <span class="page-icon emergency">🧯</span>
+            <div>
+              <p class="eyebrow">Page 5 of 10</p>
+              <h2>Emergency Planning</h2>
+              <p>Check whether critical emergency resources are visible and available.</p>
+            </div>
+          </div>
+
+          <div class="grid three-col">
+            <div class="field">
+              <span>Emergency Plan Available?</span>
+              <div class="switch-row vertical">
+                <label><input type="radio" name="emergencyPlan" value="Yes"> Yes</label>
+                <label><input type="radio" name="emergencyPlan" value="No"> No</label>
+              </div>
+              <label class="mini-upload hidden" data-upload-for="emergencyPlan">
+                <input type="file" name="emergencyPlanProof" accept="image/*,.pdf,.doc,.docx" capture="environment">
+                <strong>Upload document or take picture</strong>
+                <small>Required when answer is Yes</small>
+              </label>
+            </div>
+
+            <div class="field">
+              <span>Evacuation Procedure Posted?</span>
+              <div class="switch-row vertical">
+                <label><input type="radio" name="evacProcedure" value="Yes"> Yes</label>
+                <label><input type="radio" name="evacProcedure" value="No"> No</label>
+              </div>
+              <label class="mini-upload hidden" data-upload-for="evacProcedure">
+                <input type="file" name="evacProcedureProof" accept="image/*,.pdf,.doc,.docx" capture="environment">
+                <strong>Upload document or take picture</strong>
+                <small>Required when answer is Yes</small>
+              </label>
+            </div>
+
+            <div class="field">
+              <span>Emergency Contacts Displayed?</span>
+              <div class="switch-row vertical">
+                <label><input type="radio" name="emergencyContacts" value="Yes"> Yes</label>
+                <label><input type="radio" name="emergencyContacts" value="No"> No</label>
+              </div>
+              <label class="mini-upload hidden" data-upload-for="emergencyContacts">
+                <input type="file" name="emergencyContactsProof" accept="image/*,.pdf,.doc,.docx" capture="environment">
+                <strong>Upload document or take picture</strong>
+                <small>Required when answer is Yes</small>
+              </label>
+            </div>
+          </div>
+
+          <label class="field">
+            <span>Emergency Gaps</span>
+            <textarea name="emergencyGaps" placeholder="List missing plans, signage, contacts, or communication gaps."></textarea>
+          </label>
+        </section>
+
+        <!-- Page 6 -->
+        <section class="page" data-title="Hazards" data-icon="🔍">
+          <div class="page-heading">
+            <span class="page-icon hazards">🔍</span>
+            <div>
+              <p class="eyebrow">Page 6 of 10</p>
+              <h2>Hazards Observed</h2>
+              <p>Add each hazard separately for a clear client-ready report.</p>
+            </div>
+          </div>
+
+          <div id="hazardsList"></div>
+
+          <button type="button" id="addHazardBtn" class="secondary-btn">+ Add Another Hazard</button>
+        </section>
+
+        <!-- Page 7 -->
+        <section class="page" data-title="Photo Upload" data-icon="📸">
+          <div class="page-heading">
+            <span class="page-icon photos">📸</span>
+            <div>
+              <p class="eyebrow">Page 7 of 10</p>
+              <h2>Site Evidence</h2>
+              <p>Upload site photos to support findings and recommendations.</p>
+            </div>
+          </div>
+
+          <label class="upload-zone" for="photoUpload">
+            <input id="photoUpload" type="file" name="photos" multiple accept="image/*">
+            <span>📸</span>
+            <strong>Drop photos here or click to upload</strong>
+            <small>Supports multiple image files</small>
+          </label>
+
+          <div id="photoPreview" class="photo-grid"></div>
+        </section>
+
+        <!-- Page 8 -->
+        <section class="page" data-title="Compliance" data-icon="📋">
+          <div class="page-heading">
+            <span class="page-icon checklist">📋</span>
+            <div>
+              <p class="eyebrow">Page 8 of 10</p>
+              <h2>WorkSafeBC Compliance</h2>
+              <p>Mark the major compliance elements currently in place.</p>
+            </div>
+          </div>
+
+          <div class="checklist">
+            <label><input type="checkbox" name="safetyProgram"> <span>Safety Program in place</span></label>
+            <label><input type="checkbox" name="hazardAssessments"> <span>Hazard assessments conducted</span></label>
+            <label><input type="checkbox" name="trainingRecords"> <span>Training records maintained</span></label>
+            <label><input type="checkbox" name="incidentReporting"> <span>Incident reporting system</span></label>
+            <label><input type="checkbox" name="safetyMeetings"> <span>Safety meetings conducted</span></label>
+          </div>
+        </section>
+
+        <!-- Page 9 -->
+        <section class="page" data-title="Summary" data-icon="🧾">
+          <div class="page-heading">
+            <span class="page-icon summary">🧾</span>
+            <div>
+              <p class="eyebrow">Page 9 of 10</p>
+              <h2>Audit Summary</h2>
+              <p>Summarize the issues, actions, and client priority level.</p>
+            </div>
+          </div>
+
+          <div class="grid">
+            <label class="field">
+              <span>Key Issues Identified</span>
+              <textarea name="keyIssues" placeholder="Summarize the most important findings."></textarea>
+            </label>
+
+            <label class="field">
+              <span>Recommended Actions</span>
+              <textarea name="recommendedActions" placeholder="List clear corrective actions for the client."></textarea>
+            </label>
+
+            <label class="field">
+              <span>Priority Level</span>
+              <select name="priorityLevel">
+                <option value="">Select priority</option>
+                <option>Immediate</option>
+                <option>Within 7 days</option>
+                <option>Within 30 days</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <!-- Page 10 -->
+        <section class="page" data-title="Sign-off" data-icon="✍️">
+          <div class="page-heading">
+            <span class="page-icon sign">✍️</span>
+            <div>
+              <p class="eyebrow">Page 10 of 10</p>
+              <h2>Sign-off</h2>
+              <p>Confirm auditor and client representative details.</p>
+            </div>
+          </div>
+
+          <div class="grid two-col">
+            <label class="field">
+              <span>Auditor Name</span>
+              <input type="text" name="auditorName" placeholder="Your name">
+            </label>
+
+            <label class="field">
+              <span>Client Representative Name</span>
+              <input type="text" name="clientRep" placeholder="Client contact">
+            </label>
+          </div>
+
+          <div class="signature-card">
+            <span>Signature</span>
+            <canvas id="signaturePad" width="900" height="260"></canvas>
+            <button type="button" id="clearSignature" class="ghost-btn">Clear Signature</button>
+          </div>
+
+          <div class="result-card">
+            <p>Final Safety Score</p>
+            <strong id="finalScore">0%</strong>
+            <span id="finalMessage">Complete the form to generate a score.</span>
+          </div>
+        </section>
+
+        <footer class="form-actions">
+          <button type="button" id="prevBtn" class="ghost-btn">Back</button>
+          <div class="progress-dots" id="progressDots"></div>
+          <button type="button" id="nextBtn" class="primary-btn">Continue</button>
+          <button type="submit" id="submitBtn" class="primary-btn hidden">Generate Report</button>
+        </footer>
+      </form>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden">Audit completed successfully.</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
