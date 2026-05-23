@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modern Safety Audit Form</title>
+  <title>LeanOS Safety Audit Form</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -15,10 +15,14 @@
   <main class="app-shell">
     <aside class="sidebar" id="sidebar" aria-label="Audit progress">
       <div class="brand">
-        <button type="button" id="sidebarExpandBtn" class="sidebar-expand" aria-label="Open sidebar">✓</button>
-        <div class="brand-mark" id="sidebarLogo">✓</div>
-        <div>
-          <p class="eyebrow">WorkSafeBC Ready</p>
+        <button type="button" id="sidebarExpandBtn" class="sidebar-expand" aria-label="Open sidebar">
+          <img src="LeanOS_logo.png" alt="">
+        </button>
+        <div class="brand-mark" id="sidebarLogo">
+          <img src="LeanOS_logo.png" alt="LeanOS Consultants logo">
+        </div>
+        <div class="brand-copy">
+          <p class="eyebrow">LeanOS Consultants</p>
           <h1>Safety Audit</h1>
         </div>
         <button type="button" id="sidebarToggle" class="sidebar-toggle" aria-label="Minimize sidebar">‹</button>
@@ -38,9 +42,11 @@
 
     <section class="form-panel">
       <header class="mobile-header">
-        <div class="brand-mark">✓</div>
+        <div class="brand-mark">
+          <img src="LeanOS_logo.png" alt="LeanOS Consultants logo">
+        </div>
         <div>
-          <p class="eyebrow">Modern Safety Audit</p>
+          <p class="eyebrow">LeanOS Consultants</p>
           <h2 id="mobileTitle">Company Information</h2>
         </div>
       </header>
@@ -159,11 +165,11 @@
 
             <div class="toggle-row">
               <span>Hard Hats</span>
-              <label class="toggle"><input type="checkbox" name="ppeHardHats" checked><span></span></label>
+              <label class="toggle"><input type="checkbox" name="ppeHardHats"><span></span></label>
             </div>
             <div class="toggle-row">
               <span>Safety Boots</span>
-              <label class="toggle"><input type="checkbox" name="ppeBoots" checked><span></span></label>
+              <label class="toggle"><input type="checkbox" name="ppeBoots"><span></span></label>
             </div>
             <div class="toggle-row">
               <span>Gloves</span>
@@ -171,7 +177,7 @@
             </div>
             <div class="toggle-row">
               <span>High Visibility Clothing</span>
-              <label class="toggle"><input type="checkbox" name="ppeHiVis" checked><span></span></label>
+              <label class="toggle"><input type="checkbox" name="ppeHiVis"><span></span></label>
             </div>
           </div>
 
@@ -250,11 +256,16 @@
                 <label><input type="radio" name="emergencyPlan" value="Yes"> Yes</label>
                 <label><input type="radio" name="emergencyPlan" value="No"> No</label>
               </div>
-              <label class="mini-upload hidden" data-upload-for="emergencyPlan">
+              <div class="mini-upload hidden" data-upload-for="emergencyPlan">
                 <input type="file" name="emergencyPlanProof" accept="image/*,.pdf,.doc,.docx" capture="environment">
+                <div class="mini-upload-actions">
+                  <button type="button" class="secondary-btn proof-upload-btn">Upload Proof</button>
+                  <button type="button" class="primary-btn proof-camera-btn">Take Picture</button>
+                </div>
+                <img class="proof-preview hidden" alt="Emergency plan proof preview">
                 <strong>Upload document or take picture</strong>
                 <small>Required when answer is Yes</small>
-              </label>
+              </div>
             </div>
 
             <div class="field">
@@ -263,11 +274,16 @@
                 <label><input type="radio" name="evacProcedure" value="Yes"> Yes</label>
                 <label><input type="radio" name="evacProcedure" value="No"> No</label>
               </div>
-              <label class="mini-upload hidden" data-upload-for="evacProcedure">
+              <div class="mini-upload hidden" data-upload-for="evacProcedure">
                 <input type="file" name="evacProcedureProof" accept="image/*,.pdf,.doc,.docx" capture="environment">
+                <div class="mini-upload-actions">
+                  <button type="button" class="secondary-btn proof-upload-btn">Upload Proof</button>
+                  <button type="button" class="primary-btn proof-camera-btn">Take Picture</button>
+                </div>
+                <img class="proof-preview hidden" alt="Evacuation procedure proof preview">
                 <strong>Upload document or take picture</strong>
                 <small>Required when answer is Yes</small>
-              </label>
+              </div>
             </div>
 
             <div class="field">
@@ -276,11 +292,16 @@
                 <label><input type="radio" name="emergencyContacts" value="Yes"> Yes</label>
                 <label><input type="radio" name="emergencyContacts" value="No"> No</label>
               </div>
-              <label class="mini-upload hidden" data-upload-for="emergencyContacts">
+              <div class="mini-upload hidden" data-upload-for="emergencyContacts">
                 <input type="file" name="emergencyContactsProof" accept="image/*,.pdf,.doc,.docx" capture="environment">
+                <div class="mini-upload-actions">
+                  <button type="button" class="secondary-btn proof-upload-btn">Upload Proof</button>
+                  <button type="button" class="primary-btn proof-camera-btn">Take Picture</button>
+                </div>
+                <img class="proof-preview hidden" alt="Emergency contacts proof preview">
                 <strong>Upload document or take picture</strong>
                 <small>Required when answer is Yes</small>
-              </label>
+              </div>
             </div>
           </div>
 
@@ -313,15 +334,30 @@
             <div>
               <p class="eyebrow">Page 7 of 10</p>
               <h2>Site Evidence</h2>
-              <p>Upload site photos to support findings and recommendations.</p>
+              <p>Take pictures or upload site photos to support findings and recommendations.</p>
+            </div>
+          </div>
+
+          <input id="photoUpload" class="hidden-file" type="file" name="photos" multiple accept="image/*" capture="environment">
+
+          <div class="evidence-actions">
+            <button type="button" id="uploadPhotoBtn" class="secondary-btn">Upload Photos</button>
+            <button type="button" id="openCameraBtn" class="primary-btn">Open Camera</button>
+          </div>
+
+          <div id="cameraPanel" class="camera-panel hidden">
+            <video id="cameraStream" autoplay playsinline muted></video>
+            <canvas id="cameraCanvas" class="hidden"></canvas>
+            <div class="camera-actions">
+              <button type="button" id="capturePhotoBtn" class="primary-btn">Take Picture</button>
+              <button type="button" id="closeCameraBtn" class="ghost-btn">Close Camera</button>
             </div>
           </div>
 
           <label class="upload-zone" for="photoUpload">
-            <input id="photoUpload" type="file" name="photos" multiple accept="image/*">
             <span>📸</span>
             <strong>Drop photos here or click to upload</strong>
-            <small>Supports multiple image files</small>
+            <small>Supports multiple image files or mobile camera capture</small>
           </label>
 
           <div id="photoPreview" class="photo-grid"></div>
@@ -359,6 +395,11 @@
           </div>
 
           <div class="grid">
+            <div class="summary-tools">
+              <button type="button" id="generateSummaryBtn" class="secondary-btn">Generate From Audit Answers</button>
+              <small>Creates key issues and recommended actions from selected answers.</small>
+            </div>
+
             <label class="field">
               <span>Key Issues Identified</span>
               <textarea name="keyIssues" placeholder="Summarize the most important findings."></textarea>
